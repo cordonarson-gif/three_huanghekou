@@ -1,0 +1,76 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="126" y1="104" x2="1454" y2="908" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F4ECD9"/>
+      <stop offset="0.47" stop-color="#E5F3EC"/>
+      <stop offset="1" stop-color="#D9EBEC"/>
+    </linearGradient>
+    <linearGradient id="water" x1="266" y1="70" x2="1312" y2="860" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6DBDA6"/>
+      <stop offset="1" stop-color="#1E5966"/>
+    </linearGradient>
+    <linearGradient id="channel" x1="288" y1="128" x2="1239" y2="809" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D8F0E7" stop-opacity="0.92"/>
+      <stop offset="1" stop-color="#F5FBFF" stop-opacity="0.96"/>
+    </linearGradient>
+    <filter id="soft" x="-40" y="-40" width="1680" height="1080" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="12"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="1000" rx="48" fill="url(#bg)"/>
+
+  <g opacity="0.7">
+    <circle cx="1314" cy="144" r="132" fill="#F2D28A"/>
+    <circle cx="220" cy="850" r="166" fill="#C5E4D7"/>
+  </g>
+
+  <path d="M186 708C244 590 356 512 514 480C711 440 797 311 906 232C1021 149 1189 138 1414 161V928H176C145 828 150 784 186 708Z" fill="#CAE8D9"/>
+  <path d="M204 676C282 598 340 552 429 516C563 462 689 482 821 441C1005 384 1122 261 1379 252L1422 937H204C171 821 165 756 204 676Z" fill="#B8D8B4" opacity="0.6"/>
+
+  <path d="M240 171C429 107 617 131 779 224C907 298 993 411 1103 476C1224 548 1362 585 1483 586V1000H353C318 842 311 737 349 640C406 495 526 381 629 331C740 277 873 272 988 296C1107 321 1181 397 1278 425C1375 453 1466 451 1516 438" stroke="url(#water)" stroke-width="220" stroke-linecap="round" stroke-linejoin="round" opacity="0.86"/>
+
+  <path d="M255 178C424 124 603 145 747 227C866 296 942 400 1048 471C1166 550 1306 598 1460 603" stroke="url(#channel)" stroke-width="70" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M604 355C662 379 735 431 794 489C850 544 922 623 1025 690" stroke="url(#channel)" stroke-width="44" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+  <path d="M847 292C913 363 961 407 1048 452C1117 487 1204 529 1274 611" stroke="url(#channel)" stroke-width="34" stroke-linecap="round" stroke-linejoin="round" opacity="0.88"/>
+
+  <path d="M242 710C442 736 668 719 842 652C1053 571 1147 452 1352 433" stroke="#A0C1A2" stroke-width="18" stroke-linecap="round" stroke-dasharray="12 20" opacity="0.6"/>
+  <path d="M516 760C658 793 858 795 1014 735C1173 674 1309 579 1394 472" stroke="#8CBAB8" stroke-width="12" stroke-linecap="round" stroke-dasharray="8 18" opacity="0.7"/>
+
+  <g filter="url(#soft)" opacity="0.15">
+    <rect x="446" y="616" width="176" height="126" rx="24" fill="#0E2F3C"/>
+    <rect x="660" y="604" width="108" height="108" rx="18" fill="#0E2F3C"/>
+    <rect x="982" y="646" width="153" height="116" rx="22" fill="#0E2F3C"/>
+  </g>
+
+  <g>
+    <rect x="440" y="608" width="176" height="126" rx="24" fill="#F6FBF8" stroke="#94B7A7" stroke-width="4"/>
+    <rect x="652" y="600" width="108" height="108" rx="18" fill="#F6FBF8" stroke="#94B7A7" stroke-width="4"/>
+    <rect x="974" y="638" width="153" height="116" rx="22" fill="#F6FBF8" stroke="#94B7A7" stroke-width="4"/>
+    <path d="M452 690H604" stroke="#9DB7B0" stroke-width="6" stroke-linecap="round"/>
+    <path d="M452 666H604" stroke="#9DB7B0" stroke-width="6" stroke-linecap="round"/>
+    <path d="M452 642H604" stroke="#9DB7B0" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="706" cy="654" r="16" fill="#D7EDE3"/>
+    <circle cx="706" cy="620" r="16" fill="#D7EDE3"/>
+    <circle cx="706" cy="688" r="16" fill="#D7EDE3"/>
+    <path d="M994 716H1100" stroke="#9DB7B0" stroke-width="6" stroke-linecap="round"/>
+    <path d="M994 688H1100" stroke="#9DB7B0" stroke-width="6" stroke-linecap="round"/>
+  </g>
+
+  <g opacity="0.88">
+    <circle cx="360" cy="556" r="12" fill="#E4B84E"/>
+    <circle cx="980" cy="244" r="14" fill="#E4B84E"/>
+    <circle cx="1238" cy="600" r="10" fill="#D47D49"/>
+    <circle cx="712" cy="366" r="8" fill="#56B69F"/>
+    <circle cx="1410" cy="454" r="12" fill="#E4B84E"/>
+    <circle cx="444" cy="804" r="16" fill="#1E5966" fill-opacity="0.16"/>
+  </g>
+
+  <g font-family="Arial, sans-serif" fill="#1F4F5F">
+    <text x="90" y="120" font-size="28" font-weight="700">Yellow River Delta Park Map</text>
+    <text x="90" y="152" font-size="18" fill="#577278">Local Leaflet base map for file:// browsing</text>
+    <text x="120" y="900" font-size="18" fill="#4F6A73">Visitors Hub</text>
+    <text x="1220" y="228" font-size="18" fill="#4F6A73">Estuary View Zone</text>
+    <text x="1160" y="884" font-size="18" fill="#4F6A73">Sunset Waterfront</text>
+  </g>
+</svg>
