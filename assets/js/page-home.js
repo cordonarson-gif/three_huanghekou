@@ -219,13 +219,13 @@
           .map(function (item) {
             var imageAlt = (item.name && (item.name.zh || item.name.en)) || text(item.name);
             return (
-              '<article class="glass-card rounded-[24px] overflow-hidden">' +
+              '<article class="glass-card recommendation-card rounded-[24px] overflow-hidden">' +
               '<div class="recommendation-media-shell">' +
               '<img ' +
               imageAttrs(item.image, imageAlt) +
               ' class="recommendation-media h-full w-full object-cover" />' +
               "</div>" +
-              '<div class="p-5">' +
+              '<div class="p-5 recommendation-card-body">' +
               '<div class="flex flex-wrap gap-2">' +
               (item.badges || [])
                 .map(function (badge) {
@@ -240,7 +240,7 @@
               '<h3 class="mt-3 font-display text-xl font-semibold text-slate-900 dark:text-slate-50">' +
               escapeHtml(text(item.name)) +
               "</h3>" +
-              '<p class="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-300">' +
+              '<p class="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-300 recommendation-card-copy">' +
               escapeHtml(text(item.description)) +
               "</p>" +
               "</div>" +
@@ -340,8 +340,97 @@
       );
     }
 
+    function renderHumanitiesSection() {
+      var section = curatedContent().humanities || {};
+      var items = section.items || [];
+      var title = section.title || { zh: "黄河口人文板块", en: "Cultural side of the estuary" };
+      var subtitle =
+        section.subtitle ||
+        {
+          zh: "在自然景观之外，补充黄河口更有人情味、更适合停留与回味的人文内容。",
+          en: "A companion section that highlights the estuary's slower, more human-centered side."
+        };
+      var eyebrow = section.eyebrow || { zh: "人文印象", en: "Human stories" };
+      var note =
+        section.note ||
+        {
+          zh: "人文说明依据公开资料整理，配图使用项目本地图片资源。",
+          en: "Human-focused notes are adapted from public materials and paired with local project images."
+        };
+
+      if (!items.length) {
+        return "";
+      }
+
+      return (
+        '<section class="container-shell pb-8 md:pb-10">' +
+        '<div class="premium-section-shell">' +
+        '<div class="premium-section-head editorial-section-head">' +
+        "<div>" +
+        '<span class="premium-section-kicker">' +
+        escapeHtml(text(eyebrow)) +
+        "</span>" +
+        '<h2 class="premium-section-title">' +
+        escapeHtml(text(title)) +
+        "</h2>" +
+        '<p class="premium-section-description">' +
+        escapeHtml(text(subtitle)) +
+        "</p>" +
+        "</div>" +
+        '<aside class="curated-side-note rounded-[22px] p-4 text-sm leading-7 text-slate-600 dark:text-slate-300">' +
+        escapeHtml(text(note)) +
+        "</aside>" +
+        "</div>" +
+        '<div class="mt-6 premium-route-list">' +
+        items
+          .map(function (item) {
+            var gallery = (item.gallery || []).slice(0, 4);
+            var imageAlt = (item.title && (item.title.zh || item.title.en)) || text(item.title);
+            if (gallery.length === 1) {
+              gallery.push(gallery[0]);
+            }
+            return (
+              '<article class="glass-card rounded-[24px] p-5 landscape-feature">' +
+              '<div class="grid gap-5 xl:grid-cols-[0.95fr_1.05fr]">' +
+              "<div>" +
+              '<h3 class="font-display text-2xl font-semibold text-slate-900 dark:text-slate-50">' +
+              escapeHtml(text(item.title)) +
+              "</h3>" +
+              '<p class="mt-4 text-sm leading-7 text-slate-600 dark:text-slate-300">' +
+              escapeHtml(text(item.description)) +
+              "</p>" +
+              "</div>" +
+              '<div class="grid gap-3 sm:grid-cols-2">' +
+              gallery
+                .map(function (image) {
+                  return (
+                    '<div class="landscape-gallery-item rounded-[20px] overflow-hidden">' +
+                    '<img ' +
+                    imageAttrs(image, imageAlt) +
+                    ' class="h-full w-full object-cover" />' +
+                    "</div>"
+                  );
+                })
+                .join("") +
+              "</div>" +
+              "</div>" +
+              "</article>"
+            );
+          })
+          .join("") +
+        "</div>" +
+        "</div>" +
+        "</section>"
+      );
+    }
+
     function renderFrame() {
       var heroPlace = HHK.utils.getPlaceById("delta-estuary-boardwalk") || HHK.data.places[0];
+      var heroImage = {
+        local: "instead_image/7def0e8e7e36a2c617be1e12dcd10dab.jpg",
+        fallback: heroPlace.image.fallback,
+        objectPosition: "center 54%"
+      };
       var featurePlaces = [
         HHK.utils.getPlaceById("migration-observatory"),
         HHK.utils.getPlaceById("delta-museum")
@@ -358,7 +447,7 @@
         '<div id="premium-hero" class="premium-hero-shell">' +
         '<div class="premium-hero-media">' +
         '<img ' +
-        imageAttrs(heroPlace.image, text(heroPlace.title)) +
+        imageAttrs(heroImage, text(heroPlace.title)) +
         ' class="premium-hero-cover" />' +
         '<div class="premium-hero-overlay"></div>' +
         '<div class="premium-hero-orb orb-a"></div><div class="premium-hero-orb orb-b"></div>' +
@@ -380,13 +469,11 @@
         "</div></div>" +
         '<div class="premium-hero-cards">' +
         featurePlaces
-          .map(function (place, index) {
+          .map(function (place) {
             return (
               '<button type="button" data-open-place="' +
               place.id +
-              '" class="premium-floating-card ' +
-              (index === 0 ? "is-large" : "") +
-              '">' +
+              '" class="premium-floating-card">' +
               '<div class="premium-floating-card-image">' +
               '<img ' +
               imageAttrs(place.image, text(place.title)) +
@@ -501,6 +588,8 @@
         renderLocalFlavorsSection() +
         '<!-- [新增] 黄河口特色景观板块 -->' +
         renderSignatureLandscapesSection() +
+        '<!-- [新增] 黄河口人文板块 -->' +
+        renderHumanitiesSection() +
         '<div id="home-place-modal-backdrop" class="premium-modal-backdrop"></div>' +
         '<div id="home-place-modal" class="premium-place-modal"></div>';
     }

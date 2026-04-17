@@ -31,6 +31,10 @@
 
   function imageAttrs(image, alt) {
     var safeAlt = escapeHtml(alt || "");
+    var positionStyle =
+      image && image.objectPosition
+        ? ' style="object-position:' + escapeHtml(image.objectPosition) + ';"'
+        : "";
     return (
       'src="' +
       escapeHtml(image.local) +
@@ -38,7 +42,8 @@
       safeAlt +
       '" onerror="this.onerror=null;this.src=\'' +
       escapeHtml(image.fallback) +
-      "'\""
+      "'\"" +
+      positionStyle
     );
   }
 

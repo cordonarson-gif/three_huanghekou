@@ -136,7 +136,7 @@
         icon: "bird",
         color: "#d97745",
         title: { zh: "迁飞鸟类观察塔", en: "Migratory Bird Observatory" },
-        subtitle: { zh: "候鸟季的高能量目的地", en: "A high-energy destination during migration season." },
+        subtitle: { zh: "候鸟季的高能量目的地，也是最容易收获大场面的一站。", en: "A high-energy destination during migration season, and one of the easiest places to catch dramatic flock moments." },
         region: { zh: "观鸟缓冲带", en: "Birding Buffer Belt" },
         rating: 4.9,
         popularity: 91,
@@ -148,12 +148,12 @@
         coordinates: { lat: 37.796, lng: 118.924 },
         mapPoint: { x: 1320, y: 320 },
         image: {
-          local: "image/8e818a92875de535450c3de7595ebf20.jpg",
+          local: "instead_image/863fc2f5ac7db9d86ab8865be0e74d0d.jpg",
           fallback: "https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?auto=format&fit=crop&w=1600&q=80"
         },
         gallery: [
-          { local: "image/ec6dd4871809c236d35cdf766f2233c6.jpg", fallback: "https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?auto=format&fit=crop&w=1600&q=80" },
-          { local: "image/42aa074e1a50fb61a50b22645fd32100.jpg", fallback: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1400&q=80" }
+          { local: "instead_image/863fc2f5ac7db9d86ab8865be0e74d0d.jpg", fallback: "https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?auto=format&fit=crop&w=1600&q=80" },
+          { local: "image/70656e53f6b973590120e205e4062ffd.jpg", fallback: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1400&q=80" }
         ],
         summary: { zh: "塔上视野非常开阔，能连续看到潮间带、芦苇带和水鸟停歇区，是摄影路线中的必选点。", en: "The tower opens broad views over tidal flats, reed belts, and bird resting areas, making it essential for photographers." },
         description: { zh: "旺季经常能看到成群鸻鹬类和雁鸭类停歇补给。建议轻声移动，使用塔内固定观察窗，尽量避免惊扰鸟群。", en: "During peak migration, flocks of shorebirds and waterfowl often stop here to feed and rest. Move quietly and use the fixed viewing apertures to minimize disturbance." },
@@ -165,7 +165,7 @@
         icon: "landmark",
         color: "#2f8f79",
         title: { zh: "黄河三角洲生态展示馆", en: "Delta Ecology Discovery Hall" },
-        subtitle: { zh: "适合先建立整体认知，再进湿地实地游览", en: "A smart first stop to understand the park before heading outdoors." },
+        subtitle: { zh: "适合先建立整体认知，再进湿地实地游览，也很适合作为中途休整的一站。", en: "A smart first stop to understand the park before heading outdoors, and a comfortable mid-route pause as well." },
         region: { zh: "游客服务核心区", en: "Visitor Core Area" },
         rating: 4.7,
         popularity: 72,
@@ -177,11 +177,12 @@
         coordinates: { lat: 37.758, lng: 118.952 },
         mapPoint: { x: 500, y: 700 },
         image: {
-          local: "image/27b2a94b89f2456c61c03cf58dea7bf4.jpg",
-          fallback: "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1600&q=80"
+          local: "instead_image/96aadef4b06f367a8056efd188fd224d.jpg",
+          fallback: "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1600&q=80",
+          objectPosition: "center 72%"
         },
         gallery: [
-          { local: "image/27b2a94b89f2456c61c03cf58dea7bf4.jpg", fallback: "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1600&q=80" },
+          { local: "instead_image/96aadef4b06f367a8056efd188fd224d.jpg", fallback: "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1600&q=80", objectPosition: "center 72%" },
           { local: "image/125020caa0395c8a82ad9490a255ac67.jpg", fallback: "https://images.unsplash.com/photo-1473773508845-188df298d2d1?auto=format&fit=crop&w=1400&q=80" }
         ],
         summary: { zh: "馆内用沉浸式投影和沙盘讲清楚黄河改道、泥沙演化和鸟类栖息逻辑，非常适合雨天或亲子游客。", en: "Immersive projections and models explain river migration, sediment shifts, and habitat patterns, perfect for rainy days and families." },
@@ -368,8 +369,8 @@
               en: "Raised in slightly brackish estuary waters, it is known for full roe, firm meat, and a strong regional identity."
             },
             image: {
-              local: "https://images.pexels.com/photos/32753004/pexels-photo-32753004.jpeg?auto=compress&cs=tinysrgb&w=1200",
-              fallback: "https://images.pexels.com/photos/32753004/pexels-photo-32753004.jpeg?auto=compress&cs=tinysrgb&w=1200"
+              local: "instead_image/e0832ade28794fa0ad731b06c739bd03.jpg",
+              fallback: "instead_image/e0832ade28794fa0ad731b06c739bd03.jpg"
             }
           },
           {
@@ -392,8 +393,8 @@
               en: "A fermented shrimp condiment with a deep savory profile, commonly used for dipping, stir-frying, and noodles."
             },
             image: {
-              local: "https://images.pexels.com/photos/19951488/pexels-photo-19951488.jpeg?auto=compress&cs=tinysrgb&w=1200",
-              fallback: "https://images.pexels.com/photos/19951488/pexels-photo-19951488.jpeg?auto=compress&cs=tinysrgb&w=1200"
+              local: "instead_image/77fcf3aafa80dffd531ce4a989d2d0d0.jpg",
+              fallback: "instead_image/77fcf3aafa80dffd531ce4a989d2d0d0.jpg"
             }
           },
           {
@@ -404,8 +405,8 @@
               en: "Built around crab roe and crab paste, this rich sauce works well with rice, noodles, and seafood."
             },
             image: {
-              local: "https://images.pexels.com/photos/5410417/pexels-photo-5410417.jpeg?auto=compress&cs=tinysrgb&w=1200",
-              fallback: "https://images.pexels.com/photos/5410417/pexels-photo-5410417.jpeg?auto=compress&cs=tinysrgb&w=1200"
+              local: "instead_image/b48611a15a4f223b30dd4cb8093f1d1d.jpg",
+              fallback: "instead_image/b48611a15a4f223b30dd4cb8093f1d1d.jpg"
             }
           }
         ],
@@ -454,8 +455,8 @@
               { zh: "曾登上 CCTV", en: "Featured on CCTV" }
             ],
             image: {
-              local: "https://images.pexels.com/photos/19252757/pexels-photo-19252757.jpeg?auto=compress&cs=tinysrgb&w=1200",
-              fallback: "https://images.pexels.com/photos/19252757/pexels-photo-19252757.jpeg?auto=compress&cs=tinysrgb&w=1200"
+              local: "instead_image/de3380d0b6466cff3975823e58ed3dbf.jpg",
+              fallback: "instead_image/de3380d0b6466cff3975823e58ed3dbf.jpg"
             }
           }
         ]
@@ -505,6 +506,38 @@
               {
                 local: "https://images.pexels.com/photos/10144176/pexels-photo-10144176.jpeg?auto=compress&cs=tinysrgb&w=1200",
                 fallback: "https://images.pexels.com/photos/10144176/pexels-photo-10144176.jpeg?auto=compress&cs=tinysrgb&w=1200"
+              }
+            ]
+          }
+        ]
+      },
+      humanities: {
+        eyebrow: { zh: "人文印象", en: "Human stories" },
+        title: { zh: "黄河口人文板块", en: "Cultural side of the estuary" },
+        subtitle: {
+          zh: "在自然奇观之外，把黄河口的渔家日常、滨海生活气息与地方人文体验也纳入首页叙事，让页面更完整地呈现这片土地的温度。",
+          en: "Beyond natural spectacles, this section brings in fishing life, waterfront routines, and the human warmth of the estuary."
+        },
+        note: {
+          zh: "人文说明结合黄河口区域生活方式与公开文旅资料整理，配图使用项目内现有本地图片资源。",
+          en: "Human-focused notes are adapted from regional tourism materials and paired with local project image assets."
+        },
+        items: [
+          {
+            id: "estuary-cultural-life",
+            title: { zh: "黄河口人文与滨海生活", en: "Estuary culture and waterfront life" },
+            description: {
+              zh: "黄河口的吸引力不只在候鸟、潮汐与湿地，也在贴近水边展开的日常生活。木栈道、观景平台、滨海小聚与在地餐桌共同构成了游客对黄河口的整体记忆，让这里既有广阔自然，也有可停留、可感受的人文温度。",
+              en: "The estuary's appeal extends beyond birds and wetlands into the everyday waterfront life around boardwalks, viewing platforms, local meals, and slow social moments."
+            },
+            gallery: [
+              {
+                local: "image/75ea3f8bb3c640b5b0d8289681bde050.jpg",
+                fallback: "image/75ea3f8bb3c640b5b0d8289681bde050.jpg"
+              },
+              {
+                local: "image/34115218efa9dd22013201ae5ba10b29.jpg",
+                fallback: "image/34115218efa9dd22013201ae5ba10b29.jpg"
               }
             ]
           }

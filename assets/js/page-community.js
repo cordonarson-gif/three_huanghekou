@@ -16,6 +16,22 @@
       return HHK.utils.escapeHtml(value);
     }
 
+    function commentImageAttrs(comment, image, alt) {
+      var place = HHK.utils.getPlaceById(comment && comment.placeId);
+      var fallback =
+        place && place.image
+          ? (place.image.local || place.image.fallback)
+          : "image/169ac08bbbe1f9bad181f74e42b801de.jpg";
+
+      return HHK.utils.imageAttrs(
+        {
+          local: image,
+          fallback: fallback
+        },
+        alt
+      );
+    }
+
     function sortDefinitions() {
       return [
         { id: "latest", label: { zh: "最新", en: "Latest" } },
@@ -185,11 +201,9 @@
                 '" data-preview-index="' +
                 index +
                 '" class="community-image-tile">' +
-                '<img src="' +
-                escapeHtml(image) +
-                '" alt="' +
-                escapeHtml(comment.author) +
-                '" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="h-full w-full object-cover" />' +
+                '<img ' +
+                commentImageAttrs(comment, image, comment.author) +
+                ' loading="lazy" decoding="async" referrerpolicy="no-referrer" class="h-full w-full object-cover" />' +
                 "</button>"
               );
             })
@@ -281,7 +295,11 @@
 
     function openPreview(commentId, index) {
       var comment = commentId === "manual"
-        ? { author: previewPayload ? previewPayload.title : "", images: previewPayload ? previewPayload.images : [] }
+        ? {
+            author: previewPayload ? previewPayload.title : "",
+            images: previewPayload ? previewPayload.images : [],
+            placeId: previewPayload ? previewPayload.placeId : ""
+          }
         : allComments().find(function (item) {
             return item.id === commentId;
           });
@@ -295,17 +313,16 @@
       previewPayload = {
         images: comment.images,
         index: index || 0,
-        title: comment.author
+        title: comment.author,
+        placeId: comment.placeId || ""
       };
 
       lightbox.innerHTML =
         '<div class="community-lightbox-card">' +
         '<button type="button" data-close-preview="true" class="premium-modal-close">×</button>' +
-        '<img src="' +
-        escapeHtml(previewPayload.images[previewPayload.index]) +
-        '" alt="' +
-        escapeHtml(previewPayload.title) +
-        '" class="community-lightbox-image" />' +
+        '<img ' +
+        commentImageAttrs(comment, previewPayload.images[previewPayload.index], previewPayload.title) +
+        ' class="community-lightbox-image" />' +
         '<div class="community-lightbox-strip">' +
         previewPayload.images
           .map(function (image, idx) {
@@ -315,11 +332,9 @@
               '" class="community-lightbox-thumb ' +
               (idx === previewPayload.index ? "is-active" : "") +
               '">' +
-              '<img src="' +
-              escapeHtml(image) +
-              '" alt="' +
-              escapeHtml(previewPayload.title) +
-              '" class="h-full w-full object-cover" />' +
+              '<img ' +
+              commentImageAttrs(comment, image, previewPayload.title) +
+              ' class="h-full w-full object-cover" />' +
               "</button>"
             );
           })

@@ -595,6 +595,25 @@ html.dark .curated-side-note {
   overflow: hidden;
 }
 
+.recommendation-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.recommendation-card-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.recommendation-card-copy {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
+
 .landscape-feature {
   align-items: center;
 }
@@ -2166,7 +2185,7 @@ html.dark .site-header-shell.is-scrolled {
 }
 
 .premium-hero-shell {
-  min-height: 680px;
+  min-height: 500px;
   padding: 2rem;
 }
 
@@ -2223,7 +2242,7 @@ html.dark .site-header-shell.is-scrolled {
 }
 
 .premium-hero-content {
-  min-height: 620px;
+  min-height: 420px;
   align-items: end;
   grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
 }
@@ -2329,11 +2348,15 @@ html.dark .site-header-shell.is-scrolled {
   display: grid;
   gap: 1rem;
   align-content: end;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
 }
 
 .premium-floating-card {
   position: relative;
+  display: grid;
+  grid-template-columns: minmax(152px, 0.92fr) minmax(0, 1.08fr);
   overflow: hidden;
+  min-height: 176px;
   text-align: left;
   border-radius: 28px;
   border: 1px solid rgba(255, 255, 255, 0.18);
@@ -2342,13 +2365,8 @@ html.dark .site-header-shell.is-scrolled {
   backdrop-filter: blur(16px);
 }
 
-.premium-floating-card.is-large {
-  display: grid;
-  grid-template-columns: 0.95fr 1.05fr;
-}
-
 .premium-floating-card-image {
-  min-height: 168px;
+  min-height: 176px;
   overflow: hidden;
 }
 
@@ -2374,13 +2392,19 @@ html.dark .site-header-shell.is-scrolled {
   padding: 1.1rem;
 }
 
+.premium-floating-card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .premium-floating-card,
 .premium-floating-card-title {
   color: #fff;
 }
 
 .premium-floating-card-copy {
-  color: rgba(255, 255, 255, 0.78);
+  color: #0f172a;
 }
 
 .premium-route-title {
@@ -2434,7 +2458,6 @@ html.dark .site-header-shell.is-scrolled {
   color: inherit;
 }
 
-.premium-floating-card-copy,
 .travel-spot-slogan,
 .premium-route-copy,
 .premium-note-copy,
