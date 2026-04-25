@@ -53,6 +53,9 @@
 
   function ensureComments() {
     var comments = read(keys.comments, null);
+    var seedComments = HHK.data.communitySeedComments.slice();
+    var shouldRefreshSeeds;
+    var customComments;
     if (
       !comments ||
       !comments.length ||
@@ -60,7 +63,18 @@
       !comments[0].avatar ||
       !comments[0].images
     ) {
-      comments = write(keys.comments, HHK.data.communitySeedComments.slice());
+      comments = write(keys.comments, seedComments);
+    } else {
+      shouldRefreshSeeds = comments.some(function (item) {
+        return /^c\d+$/.test(item.id) && item.seedVersion !== 2;
+      });
+
+      if (shouldRefreshSeeds) {
+        customComments = comments.filter(function (item) {
+          return !/^c\d+$/.test(item.id);
+        });
+        comments = write(keys.comments, customComments.concat(seedComments));
+      }
     }
     return comments;
   }

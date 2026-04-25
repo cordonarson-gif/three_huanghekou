@@ -553,58 +553,81 @@
     return;
   }
 
-  var imageSets = {
-    sunrise: [
-      "image/169ac08bbbe1f9bad181f74e42b801de.jpg",
-      "image/abf20c4ea378fac430981dce609d944a.jpg",
-      "image/f3ce1668e78d905e42d173a0c4213d10.jpg"
-    ],
-    estuary: [
-      "image/169ac08bbbe1f9bad181f74e42b801de.jpg",
-      "image/42aa074e1a50fb61a50b22645fd32100.jpg",
-      "image/abf20c4ea378fac430981dce609d944a.jpg"
-    ],
-    birding: [
-      "image/ec6dd4871809c236d35cdf766f2233c6.jpg",
-      "image/42aa074e1a50fb61a50b22645fd32100.jpg",
-      "image/8e818a92875de535450c3de7595ebf20.jpg"
-    ],
-    reeds: [
-      "image/600bccf86568782befac255bb4d6cfc8.jpg",
-      "image/6443d51d1845eab909bd89a825cd3fdc.jpg",
-      "image/6e5ae7be554cc27e65792a95c47a76ec.jpg"
-    ],
-    museum: [
-      "image/27b2a94b89f2456c61c03cf58dea7bf4.jpg",
-      "image/125020caa0395c8a82ad9490a255ac67.jpg",
-      "image/1291d284d74ec3455c04c739a5e98081.jpg"
-    ],
-    lodge: [
-      "image/eco-lodge-room.jpg",
-      "image/27b2a94b89f2456c61c03cf58dea7bf4.jpg",
-      "image/f86e68e693b3176f698e10e105ce26cc.jpg"
-    ],
-    suite: [
-      "image/reed-suite-room.jpg",
-      "image/f2086fdbae5086e6812285e58989439e.jpg",
-      "image/3ef5705d5e69110533e14b1e5aeab215.jpg"
-    ],
-    breakfast: [
-      "image/fisherman-terrace.jpg",
-      "image/b9579d46d72f70178b9cd1a0d487411b.jpg",
-      "image/c660e3c3fa50bcb0fc3ec4944d515c03.jpg"
-    ],
-    dinner: [
-      "image/delta-flavor-dining.jpg",
-      "image/f2086fdbae5086e6812285e58989439e.jpg",
-      "image/34115218efa9dd22013201ae5ba10b29.jpg"
-    ],
-    family: [
-      "image/600bccf86568782befac255bb4d6cfc8.jpg",
-      "image/27b2a94b89f2456c61c03cf58dea7bf4.jpg",
-      "image/eco-lodge-room.jpg"
-    ]
-  };
+  var communityImagePool = [
+    "image/abf20c4ea378fac430981dce609d944a.jpg",
+    "image/f3ce1668e78d905e42d173a0c4213d10.jpg",
+    "image/42aa074e1a50fb61a50b22645fd32100.jpg",
+    "image/ec6dd4871809c236d35cdf766f2233c6.jpg",
+    "image/8e818a92875de535450c3de7595ebf20.jpg",
+    "image/6443d51d1845eab909bd89a825cd3fdc.jpg",
+    "image/6e5ae7be554cc27e65792a95c47a76ec.jpg",
+    "image/125020caa0395c8a82ad9490a255ac67.jpg",
+    "image/1291d284d74ec3455c04c739a5e98081.jpg",
+    "image/70656e53f6b973590120e205e4062ffd.jpg",
+    "image/5691299aebb552c09452230f5ccbe145.jpg",
+    "image/27b2a94b89f2456c61c03cf58dea7bf4.jpg",
+    "image/f86e68e693b3176f698e10e105ce26cc.jpg",
+    "image/3ef5705d5e69110533e14b1e5aeab215.jpg",
+    "image/b9579d46d72f70178b9cd1a0d487411b.jpg",
+    "image/c660e3c3fa50bcb0fc3ec4944d515c03.jpg",
+    "image/34115218efa9dd22013201ae5ba10b29.jpg",
+    "image/230faa8d76d2e9c5b45c0a693914d7f6.jpg",
+    "image/423281c599d0f4d35147386b5a33d2f7.jpg",
+    "image/784cae372517b0cc63394b2c2d414f08.jpg",
+    "image/2941279733d85dedefff14b38b2ce1ed.jpg",
+    "image/75ea3f8bb3c640b5b0d8289681bde050.jpg",
+    "image/7e198b1f0080a0635e177dbe8fd930c1.jpg",
+    "image/7edf61ca17ad812a092f878713cfbb97.jpg",
+    "image/d775b2f354f79c0e76a16543c738fbc0.jpg",
+    "image/a26d42f5d3381eba7b70869ef7c31527.jpg",
+    "image/a36f2594c6099bdf143081467b42e303.jpg",
+    "image/a9b35f1595b011cf3ef735ec65395e04.jpg",
+    "image/ac0c34471256ffe09685c9bf9b4171d7.jpg",
+    "image/cb1130f0262f197aa72676a11e706006.jpg",
+    "image/cf9b22a7b6186e2a060a2e0afcde2ea9.jpg",
+    "image/e0a5792c6fafa11b929fbe4971e3865f.jpg",
+    "image/f3ad36f6efd5325f6853ce0eabbf5c94.jpg",
+    "image/1289d6841e43e29f259a936c71c24d5b.jpg",
+    "image/2c7384e3c992d517295215aefca04de9.jpg",
+    "image/2f5f80efb6c8dcf7d5462d5906053f03.jpg",
+    "image/3c64a061ef9082c0bb1fb8230301e984.jpg",
+    "image/3f41e9a3caf8374b18824de249930778.jpg",
+    "image/56b0112bf05f282b19b8e6004a2e38af.jpg",
+    "image/6a6145cf17b8ba4d07742abc0e8c295c.jpg",
+    "image/7b799b3a7ac24f6fe1aafab780bedca6.jpg",
+    "image/7e4288960da9ff9f859aa6d6e55586d3.jpg",
+    "image/889199991441653aac2a0807e67f140c.jpg",
+    "image/8a785509abae3fab099d0ac5d1c906ca.jpg",
+    "image/9b5f88b903d90d93af8312d3a371442a.jpg",
+    "image/d3904d744019b1202ef0721d6c754301.jpg",
+    "image/d926cdd3addcfa1f349a2a9de5546b42.jpg",
+    "image/1240e6c238c59ab33337fc9b79ac9593.jpg",
+    "image/f3be2adfd44ce616bcd3c61497b36796.jpg",
+    "instead_image/77fcf3aafa80dffd531ce4a989d2d0d0.jpg",
+    "instead_image/7def0e8e7e36a2c617be1e12dcd10dab.jpg",
+    "instead_image/9959c1950418511eaf937d1b9d759705.jpg",
+    "instead_image/9d2db74510831d9a32c8f85ade0baa8a.jpg",
+    "instead_image/b48611a15a4f223b30dd4cb8093f1d1d.jpg",
+    "instead_image/d28bc318aef0d05734bc39c87be51401.jpg",
+    "instead_image/de3380d0b6466cff3975823e58ed3dbf.jpg",
+    "instead_image/e0832ade28794fa0ad731b06c739bd03.jpg",
+    "instead_image/feacb139587cdab41440fccdf82991e1.jpg"
+  ];
+  var communityImageCursor = 0;
+
+  function takeCommunityImages(count) {
+    var images = [];
+    var index;
+
+    for (index = 0; index < count; index += 1) {
+      images.push(
+        communityImagePool[(communityImageCursor + index) % communityImagePool.length]
+      );
+    }
+
+    communityImageCursor += count;
+    return images;
+  }
 
   var commentSeeds = [
     { id: "c01", author: "晨汐慢旅人", placeId: "delta-estuary-boardwalk", rating: 5, likes: 286, replies: 18, shares: 21, createdAt: "2026-03-30T06:42:00+08:00", imageSet: "sunrise", imageCount: 3, content: "日出真的值回早起，木栈道尽头能同时看到潮沟纹理和晨光铺在水面上。建议 6 点前到，风不大时整个画面很高级。" },
@@ -640,7 +663,6 @@
   ];
 
   HHK.data.communitySeedComments = commentSeeds.map(function (item, index) {
-    var images = imageSets[item.imageSet] || imageSets.sunrise;
     return {
       id: item.id,
       ownerId: "guest-" + item.id,
@@ -652,7 +674,8 @@
       replies: item.replies,
       shares: item.shares,
       createdAt: item.createdAt,
-      images: images.slice(0, item.imageCount),
+      seedVersion: 2,
+      images: takeCommunityImages(item.imageCount),
       content: item.content,
       featured: index < 8
     };
