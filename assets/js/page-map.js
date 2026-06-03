@@ -93,21 +93,9 @@
       zh: "当前可见",
       en: "Visible"
     },
-    boardwalkLabel: {
-      zh: "入海口观景带",
-      en: "Estuary view belt"
-    },
-    marshLabel: {
-      zh: "芦苇湿地慢行区",
-      en: "Reed marsh zone"
-    },
     serviceLabel: {
       zh: "游客服务中枢",
       en: "Visitor hub"
-    },
-    tidalLabel: {
-      zh: "滩涂潮汐观察带",
-      en: "Tidal mudflat belt"
     },
     sunriseSummary: {
       zh: "追一场黄河入海日出，顺路看观鸟、木栈道与在地早餐。",
@@ -304,10 +292,7 @@
 
     function fallbackGuideLabels() {
       return [
-        { x: 1120, y: 190, text: mapNarratives.boardwalkLabel },
-        { x: 620, y: 380, text: mapNarratives.marshLabel },
-        { x: 500, y: 700, text: mapNarratives.serviceLabel },
-        { x: 1310, y: 320, text: mapNarratives.tidalLabel }
+        { x: 500, y: 700, text: mapNarratives.serviceLabel }
       ]
         .map(function (item) {
           return (
@@ -337,12 +322,58 @@
         " " +
         fallbackViewBox.height +
         '" preserveAspectRatio="none" aria-hidden="true">' +
-        '<path class="fallback-map-coast" d="M0 0H1600V250C1450 280 1360 304 1270 348C1156 402 1046 500 948 600C842 708 724 794 592 856C444 926 272 960 0 1000Z"/>' +
-        '<path class="fallback-map-marsh" d="M0 566C150 516 260 454 372 398C486 342 606 306 760 302C944 296 1076 354 1188 438C1304 524 1440 680 1600 1000H0Z"/>' +
-        '<path class="fallback-map-sand" d="M0 178C164 216 290 258 430 314C584 376 706 452 822 556C900 626 980 722 1100 836H0Z"/>' +
-        '<path class="fallback-map-river-shadow" d="M156 128C260 220 350 292 430 362C516 436 608 514 720 600C866 710 1012 812 1240 916C1366 972 1466 994 1548 1000"/>' +
-        '<path class="fallback-map-river-main" d="M156 128C260 220 350 292 430 362C516 436 608 514 720 600C866 710 1012 812 1240 916C1366 972 1466 994 1548 1000"/>' +
-        '<path class="fallback-map-river-core" d="M156 128C260 220 350 292 430 362C516 436 608 514 720 600C866 710 1012 812 1240 916C1366 972 1466 994 1548 1000"/>' +
+        /* Sky gradient */
+        '<defs><linearGradient id="fallback-sky" x1="0" y1="0" x2="0" y2="1">' +
+        '<stop offset="0%" stop-color="#D6EEF0" stop-opacity="0.7"/>' +
+        '<stop offset="100%" stop-color="#E6F4F1" stop-opacity="0"/>' +
+        '</linearGradient><linearGradient id="fallback-ocean" x1="0" y1="0" x2="1" y2="1">' +
+        '<stop offset="0%" stop-color="#A8D8C8" stop-opacity="0.65"/>' +
+        '<stop offset="100%" stop-color="#8CC8B8" stop-opacity="0.5"/>' +
+        '</linearGradient></defs>' +
+        /* Sky */
+        '<rect x="0" y="0" width="1600" height="190" fill="url(#fallback-sky)"/>' +
+        /* Sun glow */
+        '<circle cx="1440" cy="128" r="144" fill="#F7D8A6" opacity="0.8"/>' +
+        '<circle cx="1440" cy="128" r="224" fill="#FFF1D8" opacity="0.25"/>' +
+        /* Ocean */
+        '<path class="fallback-map-coast" d="M0 800Q200 760 400 740Q600 720 800 730Q1000 740 1200 760Q1400 790 1600 830V1000H0Z" fill="url(#fallback-ocean)"/>' +
+        /* Coastal wetland */
+        '<path class="fallback-map-marsh" d="M0 560Q200 520 400 500Q600 490 800 510Q1000 540 1200 600Q1400 680 1600 780L1600 830Q1400 790 1200 760Q1000 740 800 730Q600 720 400 740Q200 760 0 800Z" fill="#CFE9E1" opacity="0.75"/>' +
+        /* Sandy area */
+        '<path class="fallback-map-sand" d="M400 320Q600 300 800 310Q1000 340 1200 400Q1400 480 1600 600L1600 680Q1400 560 1200 460Q1000 380 800 350Q600 330 400 350Z" fill="#F0E5C8" opacity="0.55"/>' +
+        /* Reed marsh vegetation */
+        '<path class="fallback-map-marsh" d="M0 120Q100 160 200 200Q300 240 400 260Q500 270 520 250Q480 230 400 200Q300 170 200 130Q100 100 0 80Z" fill="#7CC0A8" opacity="0.65"/>' +
+        '<path d="M160 128Q260 168 360 208Q420 232 440 248Q400 256 340 232Q260 200 180 160Q140 144 160 128Z" fill="#8ED4B8" opacity="0.6"/>' +
+        /* River shadow */
+        '<path class="fallback-map-river-shadow" d="M0 480Q100 500 200 540Q400 600 600 680Q800 760 1000 840Q1200 920 1400 960Q1500 980 1600 1000" stroke="#6CC0B1" stroke-width="48" stroke-linecap="round" fill="none" opacity="0.15"/>' +
+        /* River main */
+        '<path class="fallback-map-river-main" d="M0 480Q100 500 200 540Q400 600 600 680Q800 760 1000 840Q1200 920 1400 960Q1500 980 1600 1000" stroke="#6CC0B1" stroke-width="30" stroke-linecap="round" fill="none" opacity="0.85"/>' +
+        /* River core */
+        '<path class="fallback-map-river-core" d="M0 480Q100 500 200 540Q400 600 600 680Q800 760 1000 840Q1200 920 1400 960Q1500 980 1600 1000" stroke="#F5FFFC" stroke-width="10" stroke-linecap="round" fill="none" opacity="0.92"/>' +
+        /* Tidal channels */
+        '<path d="M200 640Q350 600 500 580Q650 560 760 568" stroke="#95CFC2" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.5" stroke-dasharray="10 14"/>' +
+        '<path d="M300 720Q440 680 580 660Q720 640 830 648" stroke="#95CFC2" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.45" stroke-dasharray="10 14"/>' +
+        /* Trees / vegetation clusters */
+        '<circle cx="448" cy="720" r="16" fill="#5DB88C" opacity="0.7"/>' +
+        '<circle cx="496" cy="720" r="14" fill="#6DC4A0" opacity="0.65"/>' +
+        '<circle cx="544" cy="720" r="12" fill="#7BC8A8" opacity="0.6"/>' +
+        '<circle cx="480" cy="680" r="10" fill="#9BCF96" opacity="0.55"/>' +
+        /* Water shimmer lines */
+        '<line x1="880" y1="840" x2="1000" y2="832" stroke="#B5E5D8" stroke-width="2" opacity="0.4" stroke-dasharray="6 10"/>' +
+        '<line x1="960" y1="880" x2="1100" y2="872" stroke="#B5E5D8" stroke-width="2" opacity="0.35" stroke-dasharray="6 10"/>' +
+        '<line x1="1040" y1="920" x2="1180" y2="912" stroke="#B5E5D8" stroke-width="2" opacity="0.3" stroke-dasharray="6 10"/>' +
+        /* Clouds */
+        '<g opacity="0.35"><ellipse cx="400" cy="80" rx="60" ry="20" fill="#fff"/>' +
+        '<ellipse cx="440" cy="72" rx="40" ry="16" fill="#fff"/></g>' +
+        '<g opacity="0.25"><ellipse cx="900" cy="60" rx="48" ry="16" fill="#fff"/>' +
+        '<ellipse cx="930" cy="54" rx="32" ry="12" fill="#fff"/></g>' +
+        /* Birds */
+        '<text x="380" y="400" font-size="28" opacity="0.5">🕊️</text>' +
+        '<text x="430" y="420" font-size="22" opacity="0.4">🕊️</text>' +
+        '<text x="350" y="380" font-size="20" opacity="0.35">🕊️</text>' +
+        /* Wave decorations */
+        '<text x="880" y="870" font-size="16" opacity="0.4">〰️</text>' +
+        '<text x="1020" y="910" font-size="16" opacity="0.35">〰️</text>' +
         (routePath
           ? '<polyline class="fallback-map-route-glow" style="--route-color:' +
             route.color +
@@ -1142,7 +1173,6 @@
       activePlaceId = placeId;
       panel.innerHTML = infoPanelMarkup(place);
       panel.classList.add("is-open");
-      backdrop.classList.add("is-visible");
       syncMarkerStates();
       renderVisibleStrip();
       HHK.utils.refreshIcons();
@@ -1159,7 +1189,6 @@
       activePlaceId = "";
       activeGalleryIndex = 0;
       panel.classList.remove("is-open");
-      backdrop.classList.remove("is-visible");
       syncMarkerStates();
       renderVisibleStrip();
     }
@@ -1185,6 +1214,7 @@
 
       decorLayerGroup.clearLayers();
 
+      /* ====== LAYER 1: Background sky & terrain ====== */
       window.L.rectangle(imageBounds, {
         renderer: vectorRenderer,
         stroke: false,
@@ -1192,179 +1222,382 @@
         fillOpacity: 1
       }).addTo(decorLayerGroup);
 
-      window.L.circle([14, 141], {
+      /* Sky gradient - soft blue at top */
+      window.L.rectangle([[0, 0], [12, 160]], {
         renderer: vectorRenderer,
-        radius: 9.5,
         stroke: false,
-        fillColor: "#F7D8A6",
-        fillOpacity: 0.95
+        fillColor: "#D6EEF0",
+        fillOpacity: 0.7
       }).addTo(decorLayerGroup);
 
-      window.L.circle([14, 141], {
+      /* Sun glow in top-right */
+      window.L.circle([8, 140], {
+        renderer: vectorRenderer,
+        radius: 9,
+        stroke: false,
+        fillColor: "#F7D8A6",
+        fillOpacity: 0.9
+      }).addTo(decorLayerGroup);
+      window.L.circle([8, 140], {
         renderer: vectorRenderer,
         radius: 14,
         stroke: false,
         fillColor: "#FFF1D8",
-        fillOpacity: 0.28
+        fillOpacity: 0.3
       }).addTo(decorLayerGroup);
 
+      /* ====== LAYER 2: Ocean/sea area (right & bottom-right) ====== */
       window.L.polygon(
-        [[0, 0], [0, 160], [24, 160], [20, 144], [18, 126], [15, 104], [13, 82], [10, 56], [8, 28], [6, 0]],
+        [[0, 100], [0, 160], [100, 160], [100, 110], [92, 105], [84, 100], [75, 96], [65, 93], [55, 91], [45, 92], [35, 95], [25, 100], [15, 105], [8, 110], [0, 115]],
         {
           renderer: vectorRenderer,
           stroke: false,
-          fillColor: "#97D8CB",
-          fillOpacity: 0.98
+          fillColor: "#A8D8C8",
+          fillOpacity: 0.65
         }
       ).addTo(decorLayerGroup);
 
+      /* Deeper water zone */
       window.L.polygon(
-        [[18, 12], [24, 26], [30, 38], [37, 48], [44, 56], [53, 65], [61, 75], [69, 88], [76, 104], [84, 122], [92, 144], [100, 160], [100, 72], [90, 70], [77, 67], [65, 63], [52, 57], [40, 48], [29, 38], [20, 24]],
+        [[50, 120], [60, 118], [72, 116], [82, 118], [90, 122], [100, 128], [100, 160], [50, 160]],
+        {
+          renderer: vectorRenderer,
+          stroke: false,
+          fillColor: "#8CC8B8",
+          fillOpacity: 0.55
+        }
+      ).addTo(decorLayerGroup);
+
+      /* Water shimmer lines */
+      [
+        [[55, 125], [62, 123], [70, 124], [78, 126]],
+        [[60, 132], [68, 130], [76, 131], [84, 133]],
+        [[52, 140], [60, 138], [68, 139], [76, 141]],
+        [[58, 148], [66, 146], [74, 147], [82, 149]]
+      ].forEach(function (seg) {
+        window.L.polyline(seg, {
+          renderer: vectorRenderer,
+          color: "#B5E5D8",
+          weight: 1.2,
+          opacity: 0.5,
+          dashArray: "4 6"
+        }).addTo(decorLayerGroup);
+      });
+
+      /* ====== LAYER 3: Coastal wetland / mudflat zone ====== */
+      window.L.polygon(
+        [[0, 55], [5, 62], [12, 70], [20, 76], [30, 80], [40, 83], [50, 85], [60, 87], [70, 90], [78, 93], [85, 97], [92, 102], [100, 108], [100, 115], [85, 108], [70, 100], [55, 95], [40, 92], [25, 93], [12, 97], [0, 105]],
         {
           renderer: vectorRenderer,
           stroke: false,
           fillColor: "#CFE9E1",
-          fillOpacity: 0.98
-        }
-      ).addTo(decorLayerGroup);
-
-      window.L.polygon(
-        [[0, 110], [12, 119], [24, 126], [40, 132], [57, 138], [74, 146], [90, 154], [100, 160], [100, 112], [84, 104], [67, 98], [46, 94], [28, 95], [14, 100], [0, 104]],
-        {
-          renderer: vectorRenderer,
-          stroke: false,
-          fillColor: "#B7E1D6",
           fillOpacity: 0.85
         }
       ).addTo(decorLayerGroup);
 
+      /* Tidal channel patterns */
+      [
+        [[15, 102], [22, 98], [30, 95], [38, 93], [46, 92]],
+        [[20, 108], [28, 104], [36, 100], [44, 97], [52, 95]],
+        [[10, 115], [18, 110], [26, 106], [34, 103]]
+      ].forEach(function (seg) {
+        window.L.polyline(seg, {
+          renderer: vectorRenderer,
+          color: "#95CFC2",
+          weight: 2.5,
+          lineCap: "round",
+          lineJoin: "round",
+          opacity: 0.6,
+          dashArray: "6 8"
+        }).addTo(decorLayerGroup);
+      });
+
+      /* ====== LAYER 4: Reed marsh / wetland vegetation ====== */
       window.L.polygon(
-        [[18, 0], [22, 14], [28, 24], [36, 30], [48, 33], [60, 36], [74, 43], [84, 52], [88, 63], [80, 66], [67, 64], [53, 60], [40, 53], [30, 44], [22, 32], [16, 16]],
+        [[18, 5], [22, 12], [28, 22], [34, 30], [40, 36], [48, 42], [55, 48], [60, 52], [62, 55], [58, 58], [50, 56], [42, 50], [34, 44], [26, 36], [20, 26], [16, 16]],
         {
           renderer: vectorRenderer,
           stroke: false,
-          fillColor: "#F4E7C8",
-          fillOpacity: 0.82
+          fillColor: "#7CC0A8",
+          fillOpacity: 0.7
         }
       ).addTo(decorLayerGroup);
 
+      /* Reed cluster 1 */
+      window.L.polygon(
+        [[22, 8], [28, 18], [34, 26], [42, 32], [48, 38], [50, 42], [46, 44], [38, 40], [30, 34], [24, 24], [20, 14]],
+        {
+          renderer: vectorRenderer,
+          stroke: false,
+          fillColor: "#8ED4B8",
+          fillOpacity: 0.75
+        }
+      ).addTo(decorLayerGroup);
+
+      /* Reed cluster 2 - denser */
+      window.L.polygon(
+        [[30, 35], [36, 42], [44, 48], [52, 53], [58, 57], [56, 60], [48, 58], [40, 54], [34, 48], [28, 40]],
+        {
+          renderer: vectorRenderer,
+          stroke: false,
+          fillColor: "#9BD8C0",
+          fillOpacity: 0.65
+        }
+      ).addTo(decorLayerGroup);
+
+      /* Sandy/grassland area (upper right) */
+      window.L.polygon(
+        [[10, 70], [15, 65], [22, 58], [30, 52], [38, 47], [46, 44], [55, 42], [62, 42], [68, 44], [70, 48], [66, 52], [58, 50], [48, 48], [38, 50], [28, 56], [20, 64], [14, 72]],
+        {
+          renderer: vectorRenderer,
+          stroke: false,
+          fillColor: "#F0E5C8",
+          fillOpacity: 0.6
+        }
+      ).addTo(decorLayerGroup);
+
+      /* ====== LAYER 5: Main Yellow River channel ====== */
+      /* River shadow */
       window.L.polyline(
-        [[12, 12], [18, 25], [24, 38], [31, 49], [39, 58], [48, 68], [57, 80], [66, 96], [76, 112], [86, 130], [94, 148]],
+        [[0, 45], [6, 50], [12, 56], [18, 62], [24, 68], [30, 74], [36, 80], [42, 86], [48, 92], [54, 98], [60, 104], [66, 110], [72, 116], [78, 122], [84, 128], [90, 134], [96, 142], [100, 148]],
+        {
+          renderer: vectorRenderer,
+          color: "rgba(108, 172, 152, 0.18)",
+          weight: 30,
+          lineCap: "round",
+          lineJoin: "round",
+          opacity: 0.9
+        }
+      ).addTo(decorLayerGroup);
+
+      /* River main body */
+      window.L.polyline(
+        [[0, 45], [6, 50], [12, 56], [18, 62], [24, 68], [30, 74], [36, 80], [42, 86], [48, 92], [54, 98], [60, 104], [66, 110], [72, 116], [78, 122], [84, 128], [90, 134], [96, 142], [100, 148]],
         {
           renderer: vectorRenderer,
           color: "#6CC0B1",
-          weight: 25,
+          weight: 20,
           lineCap: "round",
           lineJoin: "round",
-          opacity: 0.92
+          opacity: 0.88
         }
       ).addTo(decorLayerGroup);
 
+      /* River highlight core */
       window.L.polyline(
-        [[12, 12], [18, 25], [24, 38], [31, 49], [39, 58], [48, 68], [57, 80], [66, 96], [76, 112], [86, 130], [94, 148]],
+        [[0, 45], [6, 50], [12, 56], [18, 62], [24, 68], [30, 74], [36, 80], [42, 86], [48, 92], [54, 98], [60, 104], [66, 110], [72, 116], [78, 122], [84, 128], [90, 134], [96, 142], [100, 148]],
         {
           renderer: vectorRenderer,
           color: "#F5FFFC",
-          weight: 9,
+          weight: 7,
           lineCap: "round",
           lineJoin: "round",
-          opacity: 0.98
+          opacity: 0.95
         }
       ).addTo(decorLayerGroup);
 
-      [
-        [[26, 52], [32, 60], [38, 68], [45, 80]],
-        [[34, 68], [42, 76], [50, 88], [58, 102]],
-        [[41, 92], [50, 102], [58, 115]],
-        [[52, 78], [62, 86], [72, 94], [82, 106]]
-      ].forEach(function (segment) {
-        window.L.polyline(segment, {
+      /* ====== LAYER 6: Roads & boardwalk paths ====== */
+      /* Main park road */
+      window.L.polyline(
+        [[16, 20], [22, 30], [28, 40], [35, 50], [42, 58], [50, 66], [58, 74], [66, 82], [74, 90], [82, 100], [88, 110], [94, 120]],
+        {
           renderer: vectorRenderer,
           color: "#74C8B8",
-          weight: 4,
+          weight: 4.5,
           lineCap: "round",
           lineJoin: "round",
-          opacity: 0.8,
+          opacity: 0.75,
           dashArray: "10 12"
-        }).addTo(decorLayerGroup);
-      });
+        }
+      ).addTo(decorLayerGroup);
 
+      /* Boardwalk path to estuary */
+      window.L.polyline(
+        [[56, 68], [62, 74], [68, 80], [74, 88], [80, 96], [86, 106], [92, 118]],
+        {
+          renderer: vectorRenderer,
+          color: "#E8D8B0",
+          weight: 3,
+          lineCap: "round",
+          lineJoin: "round",
+          opacity: 0.7,
+          dashArray: "6 8"
+        }
+      ).addTo(decorLayerGroup);
+
+      /* Secondary trails */
       [
-        [[22, 44], [28, 52], [34, 60], [40, 70], [45, 82]],
-        [[66, 104], [74, 115], [81, 126], [87, 136]]
-      ].forEach(function (segment) {
-        window.L.polyline(segment, {
+        [[24, 36], [30, 44], [38, 52], [44, 58]],
+        [[38, 60], [46, 68], [54, 76], [62, 84]],
+        [[48, 72], [56, 80], [64, 88], [72, 96]]
+      ].forEach(function (seg) {
+        window.L.polyline(seg, {
           renderer: vectorRenderer,
           color: "#FFFFFF",
-          weight: 3.2,
+          weight: 2.5,
           lineCap: "round",
           lineJoin: "round",
-          opacity: 0.72
+          opacity: 0.6
         }).addTo(decorLayerGroup);
       });
 
+      /* ====== LAYER 7: Vegetation clusters ====== */
+      /* Tree groves */
       [
-        { point: [78, 116], radius: 2.8, color: "#F4A261" },
-        { point: [74, 124], radius: 1.8, color: "#2A9D8F" },
-        { point: [82, 130], radius: 1.5, color: "#FFFFFF" },
-        { point: [66, 92], radius: 1.4, color: "#BFE7DE" }
+        { points: [[28, 45], [30, 48], [32, 46], [34, 49], [31, 51]], color: "#5DB88C" },
+        { points: [[44, 55], [46, 58], [48, 56], [50, 59], [47, 61]], color: "#6DC4A0" },
+        { points: [[36, 70], [38, 73], [40, 71], [42, 74], [39, 76]], color: "#7BC8A8" }
+      ].forEach(function (grove) {
+        grove.points.forEach(function (pt) {
+          window.L.circleMarker(pt, {
+            renderer: vectorRenderer,
+            radius: 2.5,
+            stroke: false,
+            fillColor: grove.color,
+            fillOpacity: 0.85
+          }).addTo(decorLayerGroup);
+        });
+      });
+
+      /* Reed tufts (small green dots) */
+      [
+        { point: [26, 55], count: 6 },
+        { point: [35, 65], count: 8 },
+        { point: [42, 50], count: 5 },
+        { point: [50, 60], count: 7 },
+        { point: [30, 40], count: 4 }
+      ].forEach(function (cluster) {
+        var i;
+        for (i = 0; i < cluster.count; i += 1) {
+          window.L.circleMarker(
+            [cluster.point[0] + i * 0.5, cluster.point[1] + (i % 3) * 0.8],
+            {
+              renderer: vectorRenderer,
+              radius: 1.2,
+              stroke: false,
+              fillColor: "#9BCF96",
+              fillOpacity: 0.85
+            }
+          ).addTo(decorLayerGroup);
+        }
+      });
+
+      /* Flower accents */
+      [
+        { point: [32, 52], color: "#F4A261", radius: 1 },
+        { point: [38, 62], color: "#E9C46A", radius: 0.9 },
+        { point: [45, 56], color: "#F4A261", radius: 1.1 },
+        { point: [55, 70], color: "#E9C46A", radius: 0.8 }
       ].forEach(function (dot) {
         window.L.circleMarker(dot.point, {
           renderer: vectorRenderer,
           radius: dot.radius,
           stroke: false,
           fillColor: dot.color,
-          fillOpacity: 0.95
+          fillOpacity: 0.9
         }).addTo(decorLayerGroup);
       });
 
+      /* ====== LAYER 8: Building structures ====== */
+      /* Visitor center cluster */
       [
-        { point: [27, 58], count: 8 },
-        { point: [37, 88], count: 10 },
-        { point: [63, 108], count: 9 },
-        { point: [72, 84], count: 7 }
-      ].forEach(function (cluster) {
-        var step;
-        for (step = 0; step < cluster.count; step += 1) {
-          window.L.circleMarker(
-            [cluster.point[0] + step * 0.6, cluster.point[1] + (step % 3) * 0.9],
-            {
-              renderer: vectorRenderer,
-              radius: 1.1,
-              stroke: false,
-              fillColor: "#9BCF96",
-              fillOpacity: 0.88
-            }
-          ).addTo(decorLayerGroup);
-        }
+        { point: [78, 44], radius: 2.2, color: "#D4A870" },
+        { point: [80, 46], radius: 1.8, color: "#C89868" }
+      ].forEach(function (bld) {
+        window.L.circleMarker(bld.point, {
+          renderer: vectorRenderer,
+          radius: bld.radius,
+          stroke: true,
+          color: "#B8905C",
+          weight: 0.8,
+          fillColor: bld.color,
+          fillOpacity: 0.9
+        }).addTo(decorLayerGroup);
       });
 
+      /* ====== LAYER 9: Zone labels ====== */
       [
-        { point: [20, 118], text: mapNarratives.boardwalkLabel },
-        { point: [53, 86], text: mapNarratives.marshLabel },
-        { point: [79, 47], text: mapNarratives.serviceLabel },
-        { point: [90, 118], text: mapNarratives.tidalLabel }
+        { point: [86, 34], text: mapNarratives.serviceLabel }
       ].forEach(function (item) {
         window.L.marker(item.point, {
           interactive: false,
           icon: window.L.divIcon({
-            className: "hhk-map-label",
+            className: "hhk-map-label illustrated-zone-label",
             html: '<div class="map-label-chip">' + escapeHtml(text(item.text)) + "</div>"
           })
         }).addTo(decorLayerGroup);
       });
 
+      /* ====== LAYER 10: Animated decorative elements ====== */
+      /* Birds (flying) */
       [
-        { point: [20, 132], emoji: "🕊️" },
-        { point: [24, 138], emoji: "🕊️" },
-        { point: [28, 126], emoji: "🕊️" },
-        { point: [74, 146], emoji: "🐚" }
-      ].forEach(function (item) {
-        window.L.marker(item.point, {
+        { point: [22, 130], delay: 0 },
+        { point: [25, 135], delay: 2 },
+        { point: [20, 125], delay: 4 },
+        { point: [28, 128], delay: 1 }
+      ].forEach(function (bird) {
+        window.L.marker(bird.point, {
           interactive: false,
           icon: window.L.divIcon({
             className: "hhk-map-label icon-only",
-            html: '<div class="map-illustration-icon">' + item.emoji + "</div>"
+            html: '<div class="map-illustration-icon illustrated-bird" style="animation-delay:-' + bird.delay + 's">🕊️</div>'
+          })
+        }).addTo(decorLayerGroup);
+      });
+
+      /* Shell near shore */
+      window.L.marker([72, 142], {
+        interactive: false,
+        icon: window.L.divIcon({
+          className: "hhk-map-label icon-only",
+          html: '<div class="map-illustration-icon">🐚</div>'
+        })
+      }).addTo(decorLayerGroup);
+
+      /* Fish in water */
+      window.L.marker([65, 130], {
+        interactive: false,
+        icon: window.L.divIcon({
+          className: "hhk-map-label icon-only",
+          html: '<div class="map-illustration-icon">🐟</div>'
+        })
+      }).addTo(decorLayerGroup);
+
+      /* Clouds */
+      [
+        { point: [5, 30], size: "1.6rem" },
+        { point: [8, 80], size: "1.3rem" },
+        { point: [3, 110], size: "1.1rem" }
+      ].forEach(function (cloud) {
+        window.L.marker(cloud.point, {
+          interactive: false,
+          icon: window.L.divIcon({
+            className: "hhk-map-label icon-only",
+            html: '<div class="map-illustration-icon illustrated-cloud" style="font-size:' + cloud.size + ';opacity:0.4">☁️</div>'
+          })
+        }).addTo(decorLayerGroup);
+      });
+
+      /* Compass rose */
+      window.L.marker([6, 10], {
+        interactive: false,
+        icon: window.L.divIcon({
+          className: "hhk-map-label icon-only",
+          html: '<div class="map-illustration-icon" style="font-size:1.4rem;background:rgba(255,255,255,0.6)">🧭</div>'
+        })
+      }).addTo(decorLayerGroup);
+
+      /* Small waves */
+      [
+        { point: [56, 128] },
+        { point: [62, 135] },
+        { point: [68, 140] }
+      ].forEach(function (w) {
+        window.L.marker(w.point, {
+          interactive: false,
+          icon: window.L.divIcon({
+            className: "hhk-map-label icon-only",
+            html: '<div class="map-illustration-icon illustrated-river-animated" style="font-size:0.8rem;opacity:0.5">〰️</div>'
           })
         }).addTo(decorLayerGroup);
       });
@@ -1631,13 +1864,6 @@
       } else if (document.exitFullscreen) {
         document.exitFullscreen();
       }
-
-      window.setTimeout(function () {
-        if (map) {
-          map.invalidateSize();
-          updateMapScale();
-        }
-      }, 180);
     }
 
     function sharePlace(placeId) {
@@ -1778,13 +2004,17 @@
       });
 
       document.addEventListener("fullscreenchange", function () {
-        window.setTimeout(function () {
+        updateFullscreenButton();
+
+        function refreshMap() {
           if (map) {
             map.invalidateSize();
             updateMapScale();
           }
           updateFullscreenButton();
-        }, 120);
+        }
+
+        window.setTimeout(refreshMap, 120);
       });
     }
 

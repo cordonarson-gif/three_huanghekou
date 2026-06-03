@@ -699,6 +699,10 @@ html.dark .map-stage-shell {
   pointer-events: auto;
 }
 
+.map-stage-topbar .flex.gap-2:last-child {
+  gap: 0.5rem;
+}
+
 .map-stage-chip {
   display: inline-flex;
   align-items: center;
@@ -838,14 +842,18 @@ html.dark .map-stat-card {
 }
 
 .map-visible-strip {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1rem;
+  display: flex;
+  overflow-x: auto;
+  gap: 0.75rem;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  padding-bottom: 0.45rem;
+  scrollbar-width: thin;
 }
 
 .map-strip-card {
-  padding: 0.9rem;
-  border-radius: 1.5rem;
+  min-width: 160px;
+  max-width: 200px;
   border: 1px solid rgba(42, 157, 143, 0.1);
   background: rgba(255, 255, 255, 0.72);
   text-align: left;
@@ -1364,7 +1372,7 @@ html.dark .map-detail-panel {
   }
 
   .map-visible-strip {
-    grid-auto-columns: 76%;
+    gap: 0.65rem;
   }
 
   .map-detail-panel {
@@ -1717,6 +1725,48 @@ html.dark .fallback-map-marker-label {
   font-family: "Plus Jakarta Sans", "Noto Sans SC", sans-serif;
 }
 
+/* Fullscreen map adaptations */
+.map-stage-shell:fullscreen {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #ecf8f5, #d4ece6);
+  padding: 0;
+  border-radius: 0;
+}
+
+.map-stage-shell:fullscreen .map-stage-topbar {
+  position: relative;
+  z-index: 10;
+  padding: 1rem 1.5rem;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(42, 157, 143, 0.12);
+}
+
+.map-stage-shell:fullscreen .map-stage-topbar .map-stage-chip {
+  background: rgba(255, 255, 255, 0.74);
+}
+
+.map-stage-shell:fullscreen #map-detail-panel {
+  display: none;
+}
+
+.map-stage-shell:fullscreen #leaflet-map {
+  position: absolute;
+  inset: 0;
+  height: 100% !important;
+  width: 100%;
+}
+
+html.dark .map-stage-shell:fullscreen {
+  background: linear-gradient(180deg, #0f1b1e, #0c171a);
+}
+
+html.dark .map-stage-shell:fullscreen .map-stage-topbar {
+  background: rgba(16, 25, 29, 0.88);
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
 .map-stat-card {
   position: relative;
   overflow: hidden;
@@ -1877,18 +1927,14 @@ html.dark .fallback-map-marker-label {
 
 @media (min-width: 1280px) {
   .map-visible-strip {
-    grid-template-columns: none;
-    grid-auto-flow: column;
-    grid-auto-columns: minmax(0, 100%);
-    max-width: 100%;
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    scroll-snap-type: x mandatory;
+    gap: 0.6rem;
     padding: 0 0.2rem 0.45rem 0;
-    scrollbar-width: thin;
   }
 
   .map-strip-card {
+    min-width: 155px;
+    max-width: 180px;
+    flex-shrink: 0;
     scroll-snap-align: start;
   }
 }
@@ -1973,6 +2019,115 @@ html.dark .fallback-map-marker-label {
     transform: scale(1.18);
     opacity: 0.12;
   }
+}
+
+/* Illustrated wetland map animations */
+@keyframes waterFlow {
+  0% { opacity: 0.4; transform: translateX(0); }
+  50% { opacity: 0.7; transform: translateX(3px); }
+  100% { opacity: 0.4; transform: translateX(0); }
+}
+
+@keyframes reedSway {
+  0%, 100% { transform: rotate(0deg) scaleY(1); }
+  25% { transform: rotate(2deg) scaleY(1.02); }
+  75% { transform: rotate(-2deg) scaleY(0.98); }
+}
+
+@keyframes birdFly {
+  0% { transform: translate(0, 0); opacity: 0.8; }
+  25% { transform: translate(12px, -8px); opacity: 1; }
+  50% { transform: translate(28px, -4px); opacity: 0.9; }
+  75% { transform: translate(40px, -12px); opacity: 0.7; }
+  100% { transform: translate(56px, -6px); opacity: 0; }
+}
+
+@keyframes cloudDrift {
+  0% { transform: translateX(0); opacity: 0.3; }
+  50% { transform: translateX(15px); opacity: 0.5; }
+  100% { transform: translateX(0); opacity: 0.3; }
+}
+
+@keyframes routeDash {
+  to { stroke-dashoffset: -20; }
+}
+
+@keyframes waveRipple {
+  0%, 100% { r: 2; opacity: 0.6; }
+  50% { r: 4; opacity: 0.2; }
+}
+
+@keyframes leafletMapFadeIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Illustrated basemap container */
+#leaflet-map .leaflet-pane.leaflet-overlay-pane svg {
+  pointer-events: none;
+}
+
+#leaflet-map .leaflet-pane.leaflet-overlay-pane {
+  animation: leafletMapFadeIn 0.6s ease both;
+}
+
+/* Water flow effect on river paths */
+.illustrated-river-animated {
+  animation: waterFlow 3s ease-in-out infinite;
+}
+
+/* Reed sway effect */
+.illustrated-reed {
+  transform-origin: bottom center;
+  animation: reedSway 4s ease-in-out infinite;
+}
+
+.illustrated-reed:nth-child(2n) { animation-delay: -1s; animation-duration: 3.5s; }
+.illustrated-reed:nth-child(3n) { animation-delay: -2s; animation-duration: 4.5s; }
+
+/* Bird flight animation */
+.illustrated-bird {
+  animation: birdFly 6s linear infinite;
+}
+
+.illustrated-bird:nth-child(2) { animation-delay: -2s; animation-duration: 7s; }
+.illustrated-bird:nth-child(3) { animation-delay: -4s; animation-duration: 5.5s; }
+
+/* Cloud drift */
+.illustrated-cloud {
+  animation: cloudDrift 8s ease-in-out infinite;
+}
+
+.illustrated-cloud:nth-child(2) { animation-delay: -3s; animation-duration: 10s; }
+
+/* Route path drawing animation */
+.illustrated-route-animated {
+  stroke-dasharray: 12 8;
+  animation: routeDash 1s linear infinite;
+}
+
+/* Zone label styling for illustrated map */
+.illustrated-zone-label {
+  font-family: "Sora", "Inter", "Noto Sans SC", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-shadow: 0 1px 4px rgba(255,255,255,0.8);
+}
+
+/* Water shimmer overlay */
+.water-shimmer {
+  mix-blend-mode: overlay;
+  opacity: 0.3;
+  animation: waterFlow 5s ease-in-out infinite;
+}
+
+/* Map illustration marker enhancements */
+.map-poi-shell.illustrated {
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+}
+
+.map-poi-shell.illustrated:hover {
+  filter: drop-shadow(0 6px 16px rgba(0,0,0,0.25)) saturate(1.1);
 }
 
 @media (max-width: 767px) {
